@@ -1,7 +1,7 @@
 import React from 'react';
 
 const cc = require('cryptocompare')
-
+cc.setApiKey('4e00efef3b684972fa86f9db09f02b9de44d5d19ee8fed1ae49dfff0ea21e9ee')
 export const AppContext = React.createContext();
 
 export class AppProvider extends React.Component {
@@ -31,7 +31,6 @@ export class AppProvider extends React.Component {
 			firstVisit: false,
 			page: 'dashboard'
 		});
-		console.log('set local storage')
 		localStorage.setItem('cryptoDash', JSON.stringify({
 			test: 'hello'
 		}));
