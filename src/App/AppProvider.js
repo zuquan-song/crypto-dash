@@ -6,9 +6,32 @@ export class AppProvider extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			page: 'settings',
-			setPage: this.setPage
+			page: 'dashboard',
+			...this.savedSettings(),
+			setPage: this.setPage,
+			confirmFavorites: this.confirmFavorites
 		}
+		// localStorage.clear();
+	}
+
+	confirmFavorites = () => {
+		this.setState({
+			firstVisit: false,
+			page: 'dashboard'
+		});
+		console.log('set local storage')
+		localStorage.setItem('cryptoDash', JSON.stringify({
+			test: 'hello'
+		}));
+	}
+
+	savedSettings() {
+		let cryptoDashData = JSON.parse(localStorage.getItem('cryptoDash'))
+		console.log('cryptoDash', cryptoDashData)
+		if (!cryptoDashData) {
+			return {page: 'settings', firstVisit: true}
+		}
+		return {}; 
 	}
 
 	setPage = page => this.setState({page});
