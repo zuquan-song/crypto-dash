@@ -3,6 +3,7 @@ import './App.css';
 import Welcome from './WelcomeMessage';
 import AppLayout from './AppLayout';
 import AppBar from './AppBar';
+import {AppProvider} from './AppProvider'
 
 import styled, {css} from 'styled-components';
 
@@ -22,8 +23,10 @@ const TomatoButton = styled(MyButton)`
 function App() {
   return (
     <AppLayout>
-      <AppBar/>
-      <Welcome />
+      <AppProvider>
+        <AppBar />
+        <Welcome />
+      </AppProvider>
     </AppLayout>
   );
 }
