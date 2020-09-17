@@ -1,6 +1,9 @@
 import React from 'react';
 import './App.css';
 import Welcome from './WelcomeMessage';
+import AppLayout from './AppLayout';
+import AppBar from './AppBar';
+
 import styled, {css} from 'styled-components';
 
 const MyButton = styled.div`
@@ -18,12 +21,10 @@ const TomatoButton = styled(MyButton)`
 
 function App() {
   return (
-    <div>
+    <AppLayout>
+      <AppBar/>
       <Welcome />
-      <MyButton> Hello </MyButton>
-      <MyButton primary> Hello </MyButton>
-      <TomatoButton primay> Hello </TomatoButton>
-    </div>
+    </AppLayout>
   );
 }
 
