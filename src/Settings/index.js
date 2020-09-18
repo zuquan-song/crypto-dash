@@ -3,12 +3,14 @@ import WelcomeMessage from './WelcomeMessage';
 import ConfirmedButton from './ConfirmedButton';
 import Page from "../Shared/Page";
 import CoinGrid from './CoinGrid';
+import Search from './Search'
 
 export default function() {
 	return <Page name="settings"> 
 		<WelcomeMessage /> 
 		<CoinGrid topSection />
 		<ConfirmedButton/>
+		<Search/>
 		<CoinGrid />
 	</Page>
 }
