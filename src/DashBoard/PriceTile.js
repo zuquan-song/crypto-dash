@@ -18,7 +18,7 @@ const TickerPrice = styled.div`
 `
 
 const numberFormat = number => {
-	return -(number + '').slice(0, 7);
+	return (number + '').slice(0, 7);
 }
 
 const PriceTileStyled = styled(SelectableTile)`
@@ -47,7 +47,7 @@ function ChangePercent({data}) {
 	return (
 		<JustifyRight>
 			<ChangePct red={data.CHANGEPCT24HOUR < 0}>
-				{numberFormat(data.CHANGEPCT24HOUR)} 
+				{numberFormat(data.CHANGEPCT24HOUR)}%
 			</ChangePct>
 		</JustifyRight>);
 }
