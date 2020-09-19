@@ -15,13 +15,18 @@ const Bar = styled.div`
  	${props => props.active && css`
  		text-shadow: 0px 0px 60px #03ff03
  	`}
+
+ 	${props => props.hidden && css`
+ 		display: none;
+ 	`}
  `
 const ControllButton = ({name, active}) => {
 	return (
 			<AppContext.Consumer>
-				{({page, setPage}) => (
+				{({firstVisit, page, setPage}) => (
 				<ControllButtonElem active={page === name}
-					onClick={() => setPage(name)}> 
+									onClick={() => setPage(name)}
+									hidden={firstVisit && name === 'dashboard'}> 
 					{toProperCase(name)}
 				</ControllButtonElem>)}
 			</AppContext.Consumer>)
