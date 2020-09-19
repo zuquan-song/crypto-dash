@@ -11,8 +11,8 @@ const SearchGrid = styled.div`
 `
 
 const SearchInput = styled.input`
-	${backgroundColor2}
-	${fontSize2}
+	${backgroundColor2};
+	${fontSize2};
 	border: 1px solid;
 	height: 25px;
 	color: #1163c9;
@@ -38,7 +38,7 @@ const handleFilter = _.debounce((inputValue, coinList, setFilteredCoins) => {
 function filterCoins(e, setFilteredCoins, coinList) {
 	let inputValue = e.target.value;
 	if (!inputValue) {
-		setFilteredCoins([]);
+		setFilteredCoins(null);
 	}
 	handleFilter(inputValue, coinList, setFilteredCoins);
 }

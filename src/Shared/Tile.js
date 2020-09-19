@@ -10,14 +10,14 @@ export const Tile = styled.div`
 export const SelectableTile = styled(Tile)`
 	&:hover {
 		cursor: pointer;
-		${greenBoxShadow}
+		${greenBoxShadow};
 	}
 `;
 
 export const DeletableTile = styled(SelectableTile)`
 	&:hover {
 		cursor: pointer;
-		${redBoxShadow}
+		${redBoxShadow};
 	}
 `;
 
