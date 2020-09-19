@@ -1,9 +1,16 @@
 import React from 'react';
 import styled, {css} from 'styled-components';
-import {AppContext} from './AppProvider'
+import {AppContext} from './AppProvider';
+
 const Logo = styled.div`
 	font-size: 1.5em;
 `
+
+const ThemeItem = styled.select`
+	font-size: 0.75em;
+	align-self: center;
+`
+
 const Bar = styled.div`
 	display: grid;
 	margin-bottom: 40px;
@@ -30,6 +37,19 @@ const ControllButton = ({name, active}) => {
 					{toProperCase(name)}
 				</ControllButtonElem>)}
 			</AppContext.Consumer>)
+}
+
+const ThemeSelector = () => {
+	return (
+		<AppContext.Consumer>
+			{({currentTheme, setCurrentTheme}) => 
+					<ThemeItem defaultValue={currentTheme ? currentTheme: "dark"} onChange={e => setCurrentTheme(e.target.value)}> 
+						<option value='dark'> dark </option>
+						<option value='white'> white </option>
+					</ThemeItem>
+			}		
+		</AppContext.Consumer>
+	);
 }
 
 function toProperCase(lower) {

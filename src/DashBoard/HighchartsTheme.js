@@ -1,3 +1,5 @@
+import {lightTheme} from "../Shared/Styles";
+
 export const HighchartsTheme = {
     colors: [
     '#61d936',
@@ -10,11 +12,11 @@ export const HighchartsTheme = {
     '#1B2839'
     ],
     chart: {
-        backgroundColor: '#061a44',
+        backgroundColor: lightTheme ? 'white': '#061a44',
         borderColor: '#000000',
         borderWidth: 0,
         className: 'dark-container',
-        plotBackgroundColor: '#061a44',
+        plotBackgroundColor: lightTheme ? 'white': '#061a44',
         plotBorderWidth: 0
     },
     title: {
@@ -50,7 +52,7 @@ export const HighchartsTheme = {
     },
     yAxis: {
         gridLineColor: '#333333',
-        gridLineWidth: 1 ,
+        gridLineWidth: 0 ,
         labels: {
             style: {
                 color: '#A0A0A0'

@@ -1,7 +1,6 @@
 import React from 'react';
 import _ from 'lodash';
 import moment from 'moment';
-
 const MAX_FAVORITES = 10;
 const TIME_UNITS = 10;
 
@@ -15,6 +14,8 @@ export class AppProvider extends React.Component {
 		this.state = {
 			page: 'dashboard',
 			favorites: ['BTC', 'ETH', 'XMR', 'DOGE'],
+			timeInterval: 'month',
+			theme: 'dark',
 			...this.savedSettings(),
 			setPage: this.setPage,
 			addCoin: this.addCoin,
@@ -24,6 +25,8 @@ export class AppProvider extends React.Component {
 			setFilteredCoins: this.setFilteredCoins,
 			setCurrentFavorite: this.setCurrentFavorite,
 			fetchHistorical: this.fetchHistorical,
+			changeChartSelect: this.changeChartSelect,
+			setCurrentTheme: this.setCurrentTheme,
 		}
 		// localStorage.clear();
 	}
@@ -55,7 +58,7 @@ export class AppProvider extends React.Component {
 			{
 				name: this.state.currentFavorite,
 				data: results.map((ticker, index) => [
-					moment().subtract({months: TIME_UNITS - index}).valueOf(),
+					moment().subtract({[this.state.timeInterval]: TIME_UNITS - index}).valueOf(),
 					ticker.USD
 				])
 			}
@@ -84,7 +87,7 @@ export class AppProvider extends React.Component {
 				cc.priceHistorical(
 					this.state.currentFavorite, 
 					['USD'],
-					moment().subtract({month: units}).toDate()
+					moment().subtract({[this.state.timeInterval]: units}).toDate()
 				)
 			)
 		}
@@ -98,6 +101,7 @@ export class AppProvider extends React.Component {
 			this.setState({favorites})
 		}
 	}
+
 	removeCoin = key => {
 		let favorites = [...this.state.favorites];
 		this.setState({favorites: _.pull(favorites, key)});
@@ -134,16 +138,31 @@ export class AppProvider extends React.Component {
 		}));
 	}
 
+	setCurrentTheme = (theme) => {
+		this.setState({
+			theme: theme,
+		});
+		localStorage.setItem('cryptoDash', JSON.stringify({
+			...JSON.parse(localStorage.getItem('cryptoDash')),
+			theme: theme
+		}));
+	}
+
 	savedSettings() {
 		let cryptoDashData = JSON.parse(localStorage.getItem('cryptoDash'))
 		if (!cryptoDashData) {
 			return {page: 'settings', firstVisit: true}
 		}
-		let {favorites, currentFavorite} = cryptoDashData;
-		return {favorites, currentFavorite}; 
+		let {favorites, currentFavorite, theme} = cryptoDashData;
+		return {favorites, currentFavorite, theme}; 
 	}
 
+
 	setFilteredCoins = filteredCoins => this.setState({filteredCoins});
+
+	changeChartSelect = (value) =>  {
+		this.setState({timeInterval: value, historical: null}, this.fetchHistorical);
+	}
 
 	setPage = page => this.setState({page});
 
